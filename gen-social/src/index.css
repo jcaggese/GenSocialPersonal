@@ -15,3 +15,9 @@ h1{
 label {
   font-weight: bold;
 }
+
+.container {
+  max-width: 500px;
+  background: grey;
+  border-radius: 1%;
+}
