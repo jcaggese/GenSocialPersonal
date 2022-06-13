@@ -16,8 +16,6 @@ label {
   font-weight: bold;
 }
 
-.container {
-  max-width: 500px;
-  background: grey;
-  border-radius: 1%;
+form {
+  display: block;
 }
