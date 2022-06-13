@@ -1,13 +1,14 @@
 import React from "react"
-import Header from "./Components/Login/Header"
-import Form from "./Components/Login/Form"
+import Login from "../src/Components/Login/Login"
+import LoginHeader from "./Components/Login/LoginHeader"
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Form />
-    </div>
+    <BrowserRouter>
+      <LoginHeader />
+      <Login />
+    </BrowserRouter>
   );
 }
 

@@ -19,3 +19,8 @@ label {
 form {
   display: block;
 }
+
+.btn-primary{
+  background-color: black;
+  border-radius: 5px;
+}
