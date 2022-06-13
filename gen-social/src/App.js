@@ -1,9 +1,12 @@
 import React from "react"
+import Header from "./Components/Login/Header"
+import Form from "./Components/Login/Form"
 
 function App() {
   return (
     <div className="App">
-      <h1>GenSocial</h1>
+      <Header />
+      <Form />
     </div>
   );
 }
