@@ -1,5 +1,5 @@
 import React from "react"
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 export default function Form() {
@@ -26,7 +26,7 @@ export default function Form() {
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input type="submit" className="btn btn-primary float-end mb-1" id="submit-btn"/>
+                        <input type="submit" className="btn btn-primary float-end mb-1" id="submit-btn" />
                         <Link to="/">Already have an account?</Link>
                     </div>
                 </div>

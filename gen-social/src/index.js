@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import LoginMain from "./Components/Login/LoginMain"
 import AccCreateMain from './Components/Acc-Create/Acc-Create-Main';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
