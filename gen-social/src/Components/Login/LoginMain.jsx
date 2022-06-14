@@ -4,8 +4,9 @@ import LoginHeader from "./LoginHeader"
 
 const LoginMain = () => {
     return (
-        <div>
+        <div className="loginDiv">
             <LoginHeader />
+            <br></br>
             <Login />
         </div>
     )

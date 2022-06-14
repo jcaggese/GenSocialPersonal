@@ -7,9 +7,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html,body{
+  background-color: black;
+}
+
 h1{
   text-align: center;
   font-weight: bold;
+  color: black;
 }
 
 label {
@@ -20,7 +25,22 @@ form {
   display: block;
 }
 
-.btn-primary{
+.loginDiv {
+  padding: 250px;
+  color: white;
   background-color: black;
-  border-radius: 5px;
+}
+
+.loginHeader{
+  color: white;
+}
+
+.accountDiv{
+  padding: 200px;
+  color: white;
+  background-color: black;
+}
+
+.accountHeader{
+  color: white;
 }

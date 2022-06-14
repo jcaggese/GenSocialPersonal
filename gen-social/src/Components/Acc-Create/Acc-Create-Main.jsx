@@ -4,12 +4,12 @@ import Header from "./Header"
 
 const AccCreateMain = () => {
     return (
-        <div>
+        <div className='accountDiv'>
             <Header />
+            <br></br>
             <Form />
         </div>
     )
-
 }
 
 export default AccCreateMain;
