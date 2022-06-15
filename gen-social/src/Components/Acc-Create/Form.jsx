@@ -22,7 +22,7 @@ export default function Form() {
 
     // States for checking errors and success
     const [submitted, setSubmitted] = useState(false);
-    const [error, setError] = useState(0);
+    const [msg, setMsg] = useState('')
 
     // Handling name change
     const handleUsername = (e) => {
@@ -52,9 +52,7 @@ export default function Form() {
     // Handling submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (username === '' || email === '' || password === '') {
-        }
-        else {
+        if (isValid()) {
             await hashPassword();
             // Posting the username
             try {
@@ -85,6 +83,37 @@ export default function Form() {
         }
     };
 
+    function isValid() {
+        if (username === '' || email === '' || password === '') {
+            setError(3)
+            console.log("Empty fields")
+            return false
+        } else if (!(/\w+@\w+.\w+/).test(email)) {
+            setError(4)
+            return false
+        } else if (password.length<7 || !(/[A-Z]/g).test(password)) {
+            setError(5)
+            return false
+        } else
+            return true
+
+    }
+
+    function setError(error) {
+        if (error === 1)
+            setMsg("Username has already been taken")
+        else if (error === 2)
+            setMsg("Email has already been registered")
+        else if (error === 3)
+            setMsg("Please fill out all fields")
+        else if (error === 4)
+            setMsg("Invalid email (xxx@yyy.zzz)")
+        else if (error === 5)
+            setMsg("Invalid password (Passwords should be at least 7 letters and contain one capital letter)")
+        else if (error === 0)
+            setMsg("")
+    }
+
     const goToHome = async () => {
         await successMessage();
         setTimeout(function(){
@@ -102,20 +131,11 @@ export default function Form() {
     };
 
     const errorMessage = () => {
-        if (error === 1) {
-            return (
-                <div className="error" style={{ display: error ? '' : 'none', }}>
-                    <h1>Username has already been taken</h1>
-                </div>
-            );
-        }
-        if (error === 2) {
-            return (
-                <div className="error" style={{ display: error ? '' : 'none', }}>
-                    <h1>Email has already been registered</h1>
-                </div>
-            );
-        }
+        return (
+            <div className="error" style={{ display: msg ? '' : 'none', }}>
+                <h1>{msg}</h1>
+            </div>
+        );
     };
 
     return (
