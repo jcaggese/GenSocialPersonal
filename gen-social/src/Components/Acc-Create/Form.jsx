@@ -53,29 +53,6 @@ export default function Form() {
         console.log("made it past bcrypt.hash");
         console.log("password: " + password);
         console.log(pass);
-        // Hashing the password
-        /*bcrypt.genSalt(saltRounds, function (err, salt) {
-            console.log("made it into genSalt")
-            console.log(typeof password);
-            if (err) {
-                console.log("Error in first if")
-            }
-            else {
-                console.log("made it into salt function");
-                bcrypt.hash(password, salt, function (err, hash) {
-                    console.log("made it into .hash")
-                    if (err) {
-                        console.log("Error in second if")
-                    }
-                    else {
-                        console.log("Made it to setting the password to be the hash")
-                        setPassword(hash)
-                        console.log("this is password after it hashes");
-                        console.log(password);
-                    }
-                })
-            }
-        })*/
     }
 
     // Handling submission
