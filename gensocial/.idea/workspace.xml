@@ -5,29 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbafe708-dc8b-4fe1-9cfb-0da6dbdebdf8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Exceptions/NonUniqueEmailException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Exceptions/NonUniqueUsernameException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gen-social/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gen-social/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gen-social/src/Components/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/src/Components/Login/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gen-social/src/Components/Acc-Create/Form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/src/Components/Acc-Create/Form.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gen-social/src/Components/Debug/DebugMain.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/src/Components/Debug/DebugMain.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gen-social/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gen-social/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/genspark/gensocial/Controller/MediaController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/genspark/gensocial/DAO/UserDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/genspark/gensocial/Entity/Post.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/genspark/gensocial/Entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/genspark/gensocial/GensocialApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/genspark/gensocial/Service/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/genspark/gensocial/Service/UserServiceInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/genspark/gensocial/GensocialApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/UserServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/UserServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />

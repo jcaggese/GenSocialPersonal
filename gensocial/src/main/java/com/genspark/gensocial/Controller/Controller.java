@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -29,8 +30,13 @@ public class Controller {
         return this.userService.getUserById(id);
     }
     @PostMapping("/users")
-    public User addUser(@RequestBody User order){
-        return this.userService.addUser(order);
+    public void addUser(@RequestBody String info) throws Exception {
+        User user = new User();
+        System.out.println(info);
+        user.setUsername(info.substring(13, info.indexOf("\",\"email")));
+        user.setEmail(info.substring(info.indexOf("\",\"email\":\"") + 11 , info.indexOf("\",\"pass")));
+        user.setPassword(info.substring(info.indexOf("\",\"pass\":\"") + 11, info.indexOf("\"}")));
+        this.userService.addUser(user);
     }
 
     @PutMapping("/users")
