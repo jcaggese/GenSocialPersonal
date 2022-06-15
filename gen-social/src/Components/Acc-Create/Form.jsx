@@ -43,16 +43,9 @@ export default function Form() {
     };
 
     const hashPassword = async () => {
-        console.log("made it in handlePassword")
         const saltRounds = 5;
-        console.log("made it past saltRounds");
         const salt = await bcrypt.genSalt(saltRounds);
-        console.log("made it past bcrypt.genSalt");
         pass = await bcrypt.hash(password, salt);
-        setPassword(pass);
-        console.log("made it past bcrypt.hash");
-        console.log("password: " + password);
-        console.log(pass);
     }
 
     // Handling submission
@@ -62,7 +55,6 @@ export default function Form() {
         }
         else {
             await hashPassword();
-            console.log("Pass after hashpassword: " + pass)
             // Posting the username
             try {
                 axios.post("http://localhost:9080/users", {
