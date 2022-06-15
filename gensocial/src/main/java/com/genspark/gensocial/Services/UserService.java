@@ -12,4 +12,5 @@ public interface UserService {
     void addUser(User user) throws Exception;
     User updateUser(User user);
     String deleteUserById(int id);
+    User addPost(int id, Post post);
 }

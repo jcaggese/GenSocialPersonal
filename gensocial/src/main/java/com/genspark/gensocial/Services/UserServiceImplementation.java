@@ -4,6 +4,7 @@ import com.genspark.gensocial.Entities.*;
 import com.genspark.gensocial.Exceptions.NonUniqueEmailException;
 import com.genspark.gensocial.Exceptions.NonUniqueUsernameException;
 import com.genspark.gensocial.Repositories.*;
+import com.genspark.gensocial.Entities.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -76,5 +77,12 @@ public class UserServiceImplementation implements UserService {
 
     public void handleException() {
 
+    }
+
+    public User addPost(int id, Post post) {
+        User user = getUserById(id);
+        user.addPost(post);
+        userRepository.save(user);
+        return user;
     }
 }

@@ -2,11 +2,11 @@ package com.genspark.gensocial.Controller;
 
 import com.genspark.gensocial.Entities.*;
 import com.genspark.gensocial.Services.*;
+import com.genspark.gensocial.Entities.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -14,6 +14,8 @@ public class Controller {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private PostService pServ;
 
     @GetMapping("/")
     public String homePage(){
@@ -48,4 +50,22 @@ public class Controller {
     public String deleteUser(@PathVariable int id){
         return this.userService.deleteUserById(id);
     }
+
+    //Post API
+    @GetMapping("/posts")
+    public List<Post> getPosts(){return pServ.getPosts(); }
+
+    @GetMapping("/posts/{id}")
+    public Post getPost(@PathVariable(value="id") String id){return pServ.getPost(Integer.parseInt(id)); }
+
+    @PostMapping("/posts/{userId}")
+    public Post putPost(@PathVariable(value="userId")String userId, @RequestBody Post post) {
+        return pServ.addPost(Integer.parseInt(userId), post); }
+
+    @PutMapping("/posts")
+    public Post putPost(@RequestBody Post post) {
+        return pServ.updatePost(post); }
+
+    @DeleteMapping("/posts/{id}")
+    public String deletePost(@PathVariable(value="id")String id) {return pServ.deletePost(Integer.parseInt(id)); }
 }
