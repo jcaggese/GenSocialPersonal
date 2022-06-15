@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
 html,body{
@@ -14,7 +15,7 @@ html,body{
 h1{
   text-align: center;
   font-weight: bold;
-  color: white
+  color: white;
 }
 h2{
   text-align: center;
@@ -72,4 +73,118 @@ form {
   bottom: 100px;
   left: 800px;
   position:absolute;
+}
+
+.navbar{
+  background-color: #145DA0;
+  border: solid black 5px;
+  height: 80px;
+  overflow: hidden;
+  align-content: center;
+}
+
+/* 
+ *   .homeNavDiv is used to control all of the buttons: i.e. move them
+ */
+
+.homepage{
+  background-color: white;
+  border: solid red 5px;
+  height: 835 px;
+}
+
+.homepageDiv{
+  overflow: hidden;
+}
+
+.btn.btn-nav{
+  background-color: #B1D4E0;
+  border:solid white;
+  width: 130px;
+  margin: -10px;
+  height: auto;
+  text-align: center;
+}
+
+.account-container{
+  background-color: green;
+  width:500px;
+  height: auto;
+}
+
+.post-container{
+  background-color: blue;
+  width: 1200px;
+  padding-right: 0;
+  height: auto;
+  border: solid grey 5px;
+}
+
+.account-picture{
+  background-color: white;
+  height: auto;
+  margin: auto;
+}
+
+.center {
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message{
+  padding-top: 50px;
+}
+
+.loading{
+  height: 100px;
+}
+
+.wave {
+  width: 5px;
+  height: 80px;
+  background: linear-gradient(45deg, cyan, #fff);
+  margin: 10px;
+  animation: wave 1s linear infinite;
+  border-radius: 20px;
+}
+.wave:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.wave:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.wave:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.wave:nth-child(5) {
+  animation-delay: 0.4s;
+}
+.wave:nth-child(6) {
+  animation-delay: 0.5s;
+}
+.wave:nth-child(7) {
+  animation-delay: 0.6s;
+}
+.wave:nth-child(8) {
+  animation-delay: 0.7s;
+}
+.wave:nth-child(9) {
+  animation-delay: 0.8s;
+}
+.wave:nth-child(10) {
+  animation-delay: 0.9s;
+}
+
+@keyframes wave {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
 }

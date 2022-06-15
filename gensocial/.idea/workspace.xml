@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbafe708-dc8b-4fe1-9cfb-0da6dbdebdf8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Entities/Post.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Repositories/PostRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/PostService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/PostServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gen-social/src/Components/Acc-Create/Form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/src/Components/Acc-Create/Form.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gen-social/src/Components/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/src/Components/Login/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gen-social/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gen-social/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/src/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/UserServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/UserServiceImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>

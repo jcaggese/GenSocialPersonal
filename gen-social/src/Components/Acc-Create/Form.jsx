@@ -1,6 +1,6 @@
 import { React, useState } from "react"
 import styled from "styled-components"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 //import axios from 'axios'
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
@@ -12,6 +12,7 @@ font-size: 17px;
 `;
 
 export default function Form() {
+    const history = useNavigate();
     var pass;
 
     // States for registration
@@ -63,6 +64,7 @@ export default function Form() {
                     if (response.status === 200) {
                         setError(0)
                         setSubmitted(true)
+                        goToHome();
                     }
                 })
                     .catch(err => {
@@ -83,6 +85,12 @@ export default function Form() {
         }
     };
 
+    const goToHome = async () => {
+        await successMessage();
+        setTimeout(function(){
+            history("/home")
+        }, 5000)
+    };
 
     // Showing success message
     const successMessage = () => {
