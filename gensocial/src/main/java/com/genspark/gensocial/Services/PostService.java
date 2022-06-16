@@ -9,7 +9,7 @@ public interface PostService {
 
     Post getPost(int postId);
 
-    Post addPost(int userId, Post post);
+    Post addPost(String username, Post post);
 
     Post updatePost(Post post);
 

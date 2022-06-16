@@ -14,6 +14,7 @@ font-size: 17px;
 export default function Form() {
     const history = useNavigate();
     var pass;
+    var salt;
 
     // States for registration
     const [username, setUsername] = useState('');
@@ -45,8 +46,9 @@ export default function Form() {
 
     const hashPassword = async () => {
         const saltRounds = 5;
-        const salt = await bcrypt.genSalt(saltRounds);
-        pass = await bcrypt.hash(password, salt);
+        salt = await bcrypt.genSaltSync(saltRounds);
+        console.log("Salt: " + salt);
+        pass = await bcrypt.hashSync(password, salt);
     }
 
     // Handling submission
@@ -57,12 +59,12 @@ export default function Form() {
             // Posting the username
             try {
                 axios.post("http://localhost:9080/users", {
-                    username, email, pass
+                    username, email, pass,salt
                 }).then((response) => {
                     if (response.status === 200) {
                         setError(0)
                         setSubmitted(true)
-                        goToHome();
+                        goToLogin();
                     }
                 })
                     .catch(err => {
@@ -114,10 +116,10 @@ export default function Form() {
             setMsg("")
     }
 
-    const goToHome = async () => {
+    const goToLogin = async () => {
         await successMessage();
         setTimeout(function(){
-            history("/home")
+            history("/")
         }, 5000)
     };
 

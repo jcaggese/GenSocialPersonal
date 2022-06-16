@@ -5,13 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbafe708-dc8b-4fe1-9cfb-0da6dbdebdf8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Exceptions/UserNotFoundException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gen-social/src/Components/Acc-Create/Form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/src/Components/Acc-Create/Form.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gen-social/src/Components/Homepage/HomepageNavbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/src/Components/Homepage/HomepageNavbar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gen-social/src/Components/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/src/Components/Login/Login.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gen-social/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/src/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gen-social/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/PostServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/PostServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/UserServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/UserServiceImplementation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +34,22 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

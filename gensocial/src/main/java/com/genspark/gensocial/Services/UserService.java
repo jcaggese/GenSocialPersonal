@@ -8,9 +8,9 @@ import java.util.List;
 public interface UserService {
 
     List<User> getAllUsers();
-    User getUserById(int userId);
+    User getUserByUsername(String username);
     void addUser(User user) throws Exception;
     User updateUser(User user);
-    String deleteUserById(int id);
-    User addPost(int id, Post post);
+    String deleteUserByUsername(User user);
+    User addPost(String username, Post post);
 }

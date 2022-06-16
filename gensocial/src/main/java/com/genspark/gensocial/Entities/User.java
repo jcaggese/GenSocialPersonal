@@ -17,6 +17,8 @@ public class User {
     private String email;
     @Column(nullable=false)
     private String password;
+    @Column(nullable=false)
+    private String salt;
     @OneToMany(mappedBy="user")
     @JsonIgnoreProperties("user")
     private List<Post> posts;
@@ -61,6 +63,14 @@ public class User {
 
     public void setPassword(String newPassword) {
         this.password = newPassword;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public void addPost(Post post) {

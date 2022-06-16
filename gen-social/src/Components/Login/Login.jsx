@@ -2,6 +2,8 @@ import React from "react";
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { useState } from "react";
+import axios from "axios";
+import bcrypt from 'bcryptjs'
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 const NavLink = styled(Link)`
@@ -21,19 +23,62 @@ const Login = () => {
 
     const history = useNavigate();
 
+    var isReal = false;
+
+    const authen = async (e) => {
+        var hashedPassword;
+        var passwordsMatch;
+        var findUser = username
+        axios.post(`http://localhost:9080/users/`, {
+            username: findUser
+        }).then((res) => {
+            console.log(res.data);
+            console.log("Username: " + res.data.username);
+            console.log("Email: " + res.data.email);
+            console.log("Password: " + res.data.password);
+            console.log("Salt: " + res.data.salt);
+            hashedPassword = bcrypt.hashSync(password, res.data.salt)
+            console.log("res.data.password: " + "$" + res.data.password);
+            console.log("password:" + password);
+            console.log(hashedPassword);
+
+            passwordsMatch = hashedPassword === "$" + res.data.password
+            // Username and Password is correct
+            if (passwordsMatch) {
+                isReal = true;
+                console.log("Passwords match!");
+                console.log(isReal)
+                setLoading(true)
+            }
+            // Password is incorrect
+            else {
+                setError(5)
+                console.log("Passwords don't match");
+            }
+        }).catch(err => {
+            // Username is incorrect
+            if (err.response.status === 404) {
+                setError(4);
+                console.log("User not found")
+            }
+        });
+    }
+
     const goToHome = async () => {
         setTimeout(function () {
             history("/home")
         }, 5000)
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         console.log(err);
         e.preventDefault();
         if (username !== '' && password !== '') {
             setError(-1)
             setHasLoggedIn(true)
-            setLoading(true)
+            localStorage.setItem("loggedUser", username)
+            console.log("Logged User: " + localStorage.getItem("loggedUser"));
+            authen();
         }
         if (username === '' && password === '') {
             setError(1)
@@ -57,7 +102,7 @@ const Login = () => {
     const displayLoading = async () => {
         await welcomeMessage();
         goToHome();
-        
+
     }
 
     const welcomeMessage = () => {
@@ -90,6 +135,22 @@ const Login = () => {
             return (
                 <div className="error" style={{ display: err ? '' : 'none', }}>
                     <h1>Please enter your password</h1>
+                </div>
+            );
+        }
+        // If Username is incorrect
+        if (err === 4) {
+            return (
+                <div className="error" style={{ display: err ? '' : 'none' }}>
+                    <h1 style={{ color: "red" }}>Username is incorrect</h1>
+                </div>
+            );
+        }
+        // If Password is incorrect
+        if (err === 5) {
+            return (
+                <div className="error" style={{ display: err ? '' : 'none' }}>
+                    <h1 style={{ color: "red" }}>Password is incorrect</h1>
                 </div>
             );
         }
@@ -139,16 +200,16 @@ const Login = () => {
                     {welcomeMessage()}
                 </div>
                 <div className="center">
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave" onEnded={displayLoading()}></div>
+                    <div className="wave"></div>
+                    <div className="wave"></div>
+                    <div className="wave"></div>
+                    <div className="wave"></div>
+                    <div className="wave"></div>
+                    <div className="wave"></div>
+                    <div className="wave"></div>
+                    <div className="wave"></div>
+                    <div className="wave"></div>
+                    <div className="wave" onEnded={displayLoading()}></div>
                 </div>
             </div>
 

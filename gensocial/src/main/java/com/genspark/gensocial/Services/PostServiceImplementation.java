@@ -26,8 +26,8 @@ public class PostServiceImplementation implements PostService {
     }
 
     @Override
-    public Post addPost(int userId, Post post) {
-        User user = uServ.addPost(userId, post);
+    public Post addPost(String username, Post post) {
+        User user = uServ.addPost(username, post);
         post.setUser(user);
 
         return postRepository.save(post);

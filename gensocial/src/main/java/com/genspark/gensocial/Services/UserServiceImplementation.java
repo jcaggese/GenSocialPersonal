@@ -24,15 +24,16 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public User getUserById(int id) {
-        Optional<User> user = this.userRepository.findById(id);
+    public User getUserByUsername(String username){
+        List<User> userList = this.userRepository.findByUsername(username);
         User temp = null;
 
-        if (user.isPresent()) {
-            temp = user.get();
-        } else {
-            throw new RuntimeException("User by the ID of " + id + " cannot be found.");
+        for(User e: userList){
+            if(e.getUsername().matches(username)){
+                temp = e;
+            }
         }
+
         return temp;
     }
 
@@ -64,23 +65,26 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User updateUser(User user) {
+        AtomicBoolean valid = new AtomicBoolean(true);
+        String username = userRepository.findByUsername(user.getUsername()).stream().map(User::getUsername).toString();
 
         return this.userRepository.save(user);
     }
 
     @Override
-    public String deleteUserById(int id) {
+    public String deleteUserByUsername(User user) {
+        int id = userRepository.findByUsername(user.getUsername()).stream().map(User::getId).max(Integer::compare).get();
 
         this.userRepository.deleteById(id);
-        return "User by the ID of " + id + " has been successfully deleted...";
+        return "User was deleted";
     }
 
     public void handleException() {
 
     }
 
-    public User addPost(int id, Post post) {
-        User user = getUserById(id);
+    public User addPost(String username, Post post) {
+        User user = getUserByUsername(username);
         user.addPost(post);
         userRepository.save(user);
         return user;
