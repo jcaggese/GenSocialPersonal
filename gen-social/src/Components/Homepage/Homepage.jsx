@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import Posts from './Posts'
 
 const NavLink = styled(Link)`
 color:white;
@@ -21,11 +22,7 @@ const Homepage = () => {
                     <h1>{localStorage.getItem("loggedUser")}</h1>
                 </div>
             </div>
-            <div className='post-container'>
-                <div className='post'>
-                    <h1 style={{ color: "white" }}>here is where the posts go</h1>
-                </div>
-            </div>
+            <Posts />
         </div>
     )
 }

@@ -283,3 +283,18 @@ form {
   margin: auto;
   padding: 50px;
 }
+
+.new-post-box {
+  width: 98%;
+  margin-top: 1%;
+  padding: 1%;
+}
+
+.post{
+  margin-top: 1%;
+  margin-right: 2%;
+  margin-bottom: 1%;
+  padding: 1%;
+  display: block;
+  background-color: white;
+}
