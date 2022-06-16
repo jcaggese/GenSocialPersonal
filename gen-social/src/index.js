@@ -8,6 +8,7 @@ import Debug from './Components/Debug/DebugMain'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import HomepageMain from "./Components/Homepage/HomepageMain"
 import Settings from './Components/Settings/Settings';
+import Friends from "./Components/Friends/Friends"
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -20,6 +21,7 @@ root.render(
       <Route path="/debug" element={<Debug />}/>
       <Route path="/home" element={<HomepageMain />} />
       <Route path="/settings" element={<Settings/>} />
+      <Route path="/friends" element={<Friends />} />
     </Routes>
   </Router>
 );

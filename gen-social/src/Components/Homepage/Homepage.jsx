@@ -18,7 +18,7 @@ const Homepage = () => {
             <div className='account-container'>
                 { /* Excluding navbar */}
                 <div className='account'>
-                    <h1>this is where account picture and info will go</h1>
+                    <h1>{localStorage.getItem("loggedUser")}</h1>
                 </div>
             </div>
             <div className='post-container'>

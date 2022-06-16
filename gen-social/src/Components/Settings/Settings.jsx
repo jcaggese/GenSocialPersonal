@@ -26,10 +26,14 @@ const Settings = () => {
 
     // Function to retrieve the email from the server
     const retrieveEmail = () => {
+        // Retrieves the username from the local database and sets it to 'username' constant
         const username = localStorage.getItem("loggedUser")
+        // Makes the call to the API to retrieve the user details
         axios.get("http://localhost:9080/users").then(res => {
+            // Go through each piece in the array that the API returns
             res.data.forEach(data => {
                 if (data.username === username) {
+                    // Sets the local email variable to what the email is in the database
                     setEmail(data.email)
                 }
             })
@@ -82,6 +86,7 @@ const Settings = () => {
         }
     }
 
+    // Function to handle which key is pressed
     const handleKeyPress = e => {
         console.log(e.target.className);
         if (e.keyCode === 13 && e.target.className === "new-username-input") {
@@ -92,20 +97,18 @@ const Settings = () => {
         }
     }
 
-
+    // Function to handle updating the email
     const updateEmail = async () => {
         console.log(currentEmail);
         console.log(newEmail);
         // Stores current username to update email in database
-        const loggedEmail = await retrieveEmail()
-        console.log(loggedEmail);
 
         if (newEmail === '') {
             console.log("New email field is blank ");
             return;
         }
 
-        if (currentEmail !== loggedEmail) {
+        if (currentEmail !== localStorage.getItem("loggedEmail")) {
             console.log("Current email does not match the email on file");
         }
         else {
@@ -120,9 +123,13 @@ const Settings = () => {
                     username: localStorage.getItem("loggedUser")
                 })
                     .then((res) => {
+                        // If the email updated
                         if (res.status === 200) {
                             console.log("Email has been successfully updated!");
+                            localStorage.setItem("loggedEmail", newEmail)
+                            setSuccess(2)
                         }
+                        // If the email didn't update
                         else {
                             console.log("Oopsies! There was an error!");
                         }
@@ -151,12 +158,12 @@ const Settings = () => {
     const handlePassword = (e) => {
         setPassword(e.target.value);
     }
-
+    // Switch the browser to the login page
     const goToHome = async () => {
         await deleteAccount();
         history('/');
     }
-
+    // Validate the fields
     const validate = (e) => {
         var hashedPassword;
         var passwordsMatch;
@@ -196,18 +203,22 @@ const Settings = () => {
             })
         }
     }
-
+    // Function to delete the account
     const deleteAccount = (usernameToDelete, deletePassword) => {
         var hashedPassword;
         var passwordsMatch;
         usernameToDelete = currentUsername;
+        // Check if the username field is empty
         if (usernameToDelete === '') {
             console.log("Username field is empty");
         }
+        // If the username field is NOT empty
         else {
+            // If the written username doesn't match the logged username
             if (usernameToDelete !== localStorage.getItem("loggedUser")) {
                 console.log("Username does not match current user");
             }
+            // If the written username DOES match the logged username
             else {
                 // Password logic
                 axios.post(`http://localhost:9080/users/`, {
@@ -240,14 +251,15 @@ const Settings = () => {
                     if (err.response.status === 404) {
                         console.log("User not found")
                     }
+                    else{
+                        console.log("error");
+                    }
                 });
                 console.log("Username matches current user");
-
-
             }
         }
     }
-
+    // Function to display error messages
     const errorMessage = () => {
         if (err === 1) {
             return (
@@ -260,15 +272,20 @@ const Settings = () => {
             );
         }
     }
-
+    // Function to display success messages
     const successMessage = () => {
         if(success === 1){
             return(
                 <h1>Username successfully updated!</h1>
             )
         }
+        if(success === 2){
+            return(
+                <h1>Email successfully updated!</h1>
+            )
+        }
     }
-
+    // Show the settings page
     const showSettingsMain = () => {
         if (decision === 0) {
             return (
@@ -280,7 +297,7 @@ const Settings = () => {
                         <h1 className='here'> Account Settings</h1>
                         <div className='container-fluid' style={{ display: "flex", flexwrap: "row" }}>
                             <div className='settings-account' style={{ border: "solid black 5px", width: "300px", height: "200px", aligncontent: "center" }}>
-                                <h2 className='settings-account-picture'>acc picture will go here</h2>
+                                <h2 className='settings-account-picture'>{localStorage.getItem("loggedUser")}</h2>
                             </div>
                             <div className='container-fluid-buttons' style={{ width: "1400px", border: "solid black 5px", backgroundColor: "#2E8BC0", textAlign: "center" }}>
                                 <div>
@@ -296,7 +313,7 @@ const Settings = () => {
                                     <button id="change-email" style={{ marginTop: "10px", backgroundColor: "black" }} onClick={handleDecision} className='btn btn-primary'>Change Email</button>
                                 </div>
                                 <div>
-                                    <button id="delete-account" style={{ marginTop: "10px", backgroundColor: "black" }} onClick={handleDecision} className='btn btn-primary'>Delete Account "NOT DONE"</button>
+                                    <button id="delete-account" style={{ marginTop: "10px", backgroundColor: "black" }} onClick={handleDecision} className='btn btn-primary'>Delete Account</button>
                                 </div>
                             </div>
                         </div>
@@ -315,7 +332,7 @@ const Settings = () => {
                         <h1 className='here'> Account Settings</h1>
                         <div className='container-fluid' style={{ display: "flex", flexwrap: "row" }}>
                             <div className='settings-account' style={{ border: "solid black 5px", width: "300px", height: "200px", aligncontent: "center" }}>
-                                <h2 className='settings-account-picture'>acc picture will go here</h2>
+                                <h2 className='settings-account-picture'>{localStorage.getItem("loggedUser")}</h2>
                             </div>
                             <div className='container-fluid' style={{ width: "1400px", border: "solid black 5px", backgroundColor: "#2E8BC0", textAlign: "center" }}>
                                 <div id="accountDetailsDiv">
@@ -348,7 +365,7 @@ const Settings = () => {
                         <h1 className='here'> Account Settings</h1>
                         <div className='container-fluid' style={{ display: "flex", flexwrap: "row" }}>
                             <div className='settings-account' style={{ border: "solid black 5px", width: "300px", height: "200px", aligncontent: "center" }}>
-                                <h2 className='settings-account-picture'>acc picture will go here</h2>
+                                <h2 className='settings-account-picture'>{localStorage.getItem("loggedUser")}</h2>
                             </div>
                             <div className='container-fluid' style={{ width: "1400px", border: "solid black 5px", backgroundColor: "#2E8BC0", textAlign: "center" }}>
                                 <div id="changeUsernameDiv">
@@ -384,7 +401,7 @@ const Settings = () => {
                         <h1 className='here'> Account Settings</h1>
                         <div className='container-fluid' style={{ display: "flex", flexwrap: "row" }}>
                             <div className='settings-account' style={{ border: "solid black 5px", width: "300px", height: "200px", aligncontent: "center" }}>
-                                <h2 className='settings-account-picture'>acc picture will go here</h2>
+                                <h2 className='settings-account-picture'>{localStorage.getItem("loggedUser")}</h2>
                             </div>
                             <div className='container-fluid' style={{ width: "1400px", border: "solid black 5px", backgroundColor: "#2E8BC0", textAlign: "center" }}>
                                 <div id="changeUsernameDiv">
@@ -424,7 +441,7 @@ const Settings = () => {
                         <h1 className='here'> Account Settings</h1>
                         <div className='container-fluid' style={{ display: "flex", flexwrap: "row" }}>
                             <div className='settings-account' style={{ border: "solid black 5px", width: "300px", height: "200px", aligncontent: "center" }}>
-                                <h2 className='settings-account-picture'>acc picture will go here</h2>
+                                <h2 className='settings-account-picture'>{localStorage.getItem("loggedUser")}</h2>
                             </div>
                             <div className='container-fluid' style={{ width: "1400px", border: "solid black 5px", backgroundColor: "#2E8BC0", textAlign: "center" }}>
                                 <div id="changeUsernameDiv">
@@ -437,6 +454,7 @@ const Settings = () => {
                                         <input onChange={handleNewEmail} onKeyDown={handleKeyPress} style={{ marginLeft: "10px", width: "210px" }} type="text" className='new-email-input' placeholder='Please type new email here'></input>
                                     </div>
                                 </div>
+                                {successMessage()}
                                 <div className='change-username-div'>
                                     <div>
                                         <button type="change-email" onClick={updateEmail} style={{ backgroundColor: "red" }} className='btn btn-primary mb-1'>Submit</button>
@@ -460,7 +478,7 @@ const Settings = () => {
                         <h1 className='here'> Account Settings</h1>
                         <div className='container-fluid' style={{ display: "flex", flexwrap: "row" }}>
                             <div className='settings-account' style={{ border: "solid black 5px", width: "300px", height: "200px", aligncontent: "center" }}>
-                                <h2 className='settings-account-picture'>acc picture will go here</h2>
+                                <h2 className='settings-account-picture'>{localStorage.getItem("loggedUser")}</h2>
                             </div>
                             <div className='container-fluid' style={{ width: "1400px", border: "solid black 5px", backgroundColor: "#2E8BC0", textAlign: "center" }}>
                                 <div id="changeUsernameDiv">
@@ -540,13 +558,3 @@ const Settings = () => {
 
 
 export default Settings;
-
-
-
-/* Change Username
-<div className='container-fluid' style={{ border: "solid black 5px", backgroundColor: "#2E8BC0" }}>
-                        <div id="changeUsernameDiv">
-                            <label htmlFor='changeUsername' className='form-label' style={{ fontSize: "26px" }}>Change Username:</label>
-                            <input style={{ marginLeft: "10px"}} type="text" className='change-username-input' placeholder='Please type desired username here'></input>
-                        </div>
-                    </div> */

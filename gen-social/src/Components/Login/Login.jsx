@@ -38,6 +38,8 @@ const Login = () => {
             console.log("Password: " + res.data.password);
             console.log("Salt: " + res.data.salt);
             hashedPassword = bcrypt.hashSync(password, res.data.salt)
+            getFriends();
+            localStorage.setItem("loggedEmail", res.data.email)
             console.log("res.data.password: " + "$" + res.data.password);
             console.log("password:" + password);
             console.log(hashedPassword);
@@ -61,6 +63,41 @@ const Login = () => {
                 setError(4);
                 console.log("User not found")
             }
+        });
+    }
+
+    const getFriends = () => {
+        var temp = []
+        axios.post("http://localhost:9080/users/", {
+            username: localStorage.getItem("loggedUser")
+        }).then((res) => {
+            var friendsList;
+            // Stores the user_ids in a list
+            if (res.data.friends !== null) {
+                friendsList = res.data.friends.split(",");
+            }
+
+            axios.get("http://localhost:9080/users")
+                .then(res => {
+                    var i = 0;
+                    console.log(res.data);
+                    res.data.forEach(data => {
+                        console.log("this is data.id: " + data.id);
+                        friendsList.forEach(friend => {
+                            if (data.id === parseInt(friend)) {
+                                temp[i] = data.username
+                                i++
+                            }
+                            console.log("this is temp: " + temp);
+                        });
+                    });
+                    if (temp[0] === undefined) {
+                        temp.splice(0, 1)
+                    }
+                    console.log("this is temp outside: " + temp);
+                    localStorage.setItem("friends", temp)
+                    console.log(localStorage.getItem("friends"));
+                })
         });
     }
 

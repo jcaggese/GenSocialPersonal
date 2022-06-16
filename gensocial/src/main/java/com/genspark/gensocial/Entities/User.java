@@ -3,7 +3,12 @@ package com.genspark.gensocial.Entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+
+import static java.lang.Integer.parseInt;
 
 
 @Entity
@@ -19,6 +24,8 @@ public class User {
     private String password;
     @Column(nullable=false)
     private String salt;
+    @Column
+    private String friends;
     @OneToMany(mappedBy="user")
     @JsonIgnoreProperties("user")
     private List<Post> posts;
@@ -27,10 +34,38 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.friends = "";
     }
 
     public User() {
 
+    }
+
+    public String getFriends() {
+        return friends;
+    }
+
+    public void setFriend(int id) {
+        if(this.friends == null){
+            this.friends = (String.valueOf(id));
+        }
+        else {
+            this.friends = this.friends.concat("," + id);
+        }
+    }
+
+    public void removeFriend(int id){
+        List<String> friendsList = new LinkedList<>(Arrays.asList(friends.split(",")));
+        friendsList.removeIf(s -> s.matches(String.valueOf(id)));
+        System.out.println(friendsList);
+        if(friendsList.size() == 0){
+            friends = null;
+        }
+        else {
+            for (String s : friendsList) {
+                friends = s;
+            }
+        }
     }
 
     public int getId() {

@@ -259,3 +259,27 @@ form {
   border: 1px solid #999;
   font-size: 20px;
 }
+
+.friends{
+  background-color: #B1D4E0;
+  border: solid black 5px;
+}
+
+.friends-account-picture{
+  background-color: white;
+  color: black;
+  height: auto;
+  width: 200px;
+  margin: auto;
+}
+
+.friends h1{
+  color: black;
+}
+
+.friends-account{
+  background-color: white;
+  text-align: center;
+  margin: auto;
+  padding: 50px;
+}

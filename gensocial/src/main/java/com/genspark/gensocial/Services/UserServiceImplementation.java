@@ -3,6 +3,7 @@ package com.genspark.gensocial.Services;
 import com.genspark.gensocial.Entities.*;
 import com.genspark.gensocial.Exceptions.NonUniqueEmailException;
 import com.genspark.gensocial.Exceptions.NonUniqueUsernameException;
+import com.genspark.gensocial.Exceptions.UserNotFoundException;
 import com.genspark.gensocial.Repositories.*;
 import com.genspark.gensocial.Entities.Post;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,10 @@ public class UserServiceImplementation implements UserService {
             if(e.getUsername().matches(username)){
                 temp = e;
             }
+        }
+
+        if(temp == null){
+            throw new UserNotFoundException("User not found");
         }
 
         return temp;
@@ -65,10 +70,12 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User updateUser(User user) {
-        AtomicBoolean valid = new AtomicBoolean(true);
-        String username = userRepository.findByUsername(user.getUsername()).stream().map(User::getUsername).toString();
-
-        return this.userRepository.save(user);
+        if(user == null){
+            throw new UserNotFoundException("User not found");
+        }
+        else {
+            return this.userRepository.save(user);
+        }
     }
 
     @Override

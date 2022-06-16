@@ -64,18 +64,18 @@ const HomepageNavbar = () => {
                 <div className='col'></div>
                 <div className='col'></div>
                 <div className='col'>
-                <button id="change-email" onClick={togglePopUp} style={{ borderRadius: "10px", fontSize: "17px", fontFamily: "Georgia, serif", fontWeight: "bold" }}className='btn btn-nav'>Log Out</button>
+                    <button id="log-out" onClick={togglePopUp} style={{ borderRadius: "10px", fontSize: "17px", fontFamily: "Georgia, serif", fontWeight: "bold" }} className='btn btn-nav'>Log Out</button>
                 </div>
             </div>
             {isOpen && <LogOutPopUp
-            content={<>
-            <b style={{ color: "white", fontSize: "20px"}}>Are you sure you want to logout?</b>
-            <div style={{ marginTop: "50px"}}>
-                <button id='confirmLogout'onClick={goToHome} style={{ width: "100px", height: "50px", backgroundColor: "white"}}>Yes</button>
-                <button id='cancelLogout' onClick={togglePopUp} style={{ width: "100px", height: "50px", marginLeft: "50px", backgroundColor: "white"}}>No</button>
-            </div>
-            </>}
-            handleClose={togglePopUp}
+                content={<>
+                    <b style={{ color: "white", fontSize: "20px" }}>Are you sure you want to logout?</b>
+                    <div style={{ marginTop: "50px" }}>
+                        <button id='confirmLogout' onClick={goToHome} style={{ width: "100px", height: "50px", backgroundColor: "white" }}>Yes</button>
+                        <button id='cancelLogout' onClick={togglePopUp} style={{ width: "100px", height: "50px", marginLeft: "50px", backgroundColor: "white" }}>No</button>
+                    </div>
+                </>}
+                handleClose={togglePopUp}
             />}
         </div>
     );

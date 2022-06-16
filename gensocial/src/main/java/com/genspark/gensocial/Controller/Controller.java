@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 public class Controller {
 
     @Autowired
@@ -42,6 +43,34 @@ public class Controller {
 
         return user;
     }
+
+    @PostMapping("/users/delete")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public User deleteFriend(@RequestBody String info){
+        System.out.println("delete method accessed");
+        System.out.println(info);
+        String friend = info.substring(11, info.indexOf("\",\"username"));
+        System.out.println(friend);
+        String usernameSubstring = info.substring(info.indexOf("e\":\"") + 4, info.indexOf("\"}"));
+        User user = null;
+        // See if the friend we want to add has an account
+        try {
+            // Look for friend's account in database
+            User friendUser = userService.getUserByUsername(friend);
+            int friendId = Stream.of(userService.getUserByUsername(friend)).map(User::getId).max(Integer::compare).get();
+            System.out.println(friendId);
+            user = userService.getUserByUsername(usernameSubstring);
+            System.out.println("user.getFriends before remove" + user.getFriends());
+            user.removeFriend(friendId);
+            System.out.println("user.getFriends after remove" + user.getFriends());
+        }
+        catch(UserNotFoundException ex){
+            System.out.println(ex.getMessage());
+        }
+
+        return this.userService.updateUser(user);
+    }
+
     @PostMapping("/users")
     public void addUser(@RequestBody String info) throws Exception {
         User user = new User();
@@ -55,23 +84,43 @@ public class Controller {
 
     @PutMapping("/users")
     public User updateUser(@RequestBody String info) {
-        String usernameSubstring;
+        String usernameSubstring = info.substring(info.indexOf("e\":\"") + 4, info.indexOf("\"}"));
         User user = null;
         System.out.println(info);
 
+        // Updating the email
         if (info.substring(2, 7).matches("email")) {
-            usernameSubstring = info.substring(info.indexOf("e\":\"") + 4, info.indexOf("\"}"));
             user = userService.getUserByUsername(usernameSubstring);
             user.setEmail(info.substring(10, info.indexOf("\",\"")));
         }
-
+        // Updating the password
         if (info.substring(2, 10).matches("username")) {
             String newUsernameSubstring = info.substring(info.indexOf("update") + 9, info.indexOf("\"}"));
-            usernameSubstring = info.substring(info.indexOf("e\":\"") + 4, info.indexOf("\",\""));
-            user = userService.getUserByUsername(usernameSubstring);
+            String userSubstring = info.substring(info.indexOf("e\":\"") + 4, info.indexOf("\",\""));
+            user = userService.getUserByUsername(userSubstring);
             user.setUsername(newUsernameSubstring);
         }
-
+        // Adding friends
+        if(info.substring(2,8).matches("friend")){
+            System.out.println("Friend method accessed");
+            String friend = info.substring(11, info.indexOf("\",\"username"));
+            System.out.println(friend);
+            // See if the friend we want to add has an account
+            try {
+                // Look for friend's account in database
+                User friendUser = userService.getUserByUsername(friend);
+                System.out.println("friendUser = userservice");
+                int friendId = Stream.of(userService.getUserByUsername(friend)).map(User::getId).max(Integer::compare).get();
+                System.out.println("friendId = Stream.of");
+                user = userService.getUserByUsername(usernameSubstring);
+                System.out.println("user = userService");
+                user.setFriend(friendId);
+                System.out.println("user.addFriend");
+            }
+            catch(UserNotFoundException ex){
+                System.out.println(ex.getMessage());
+            }
+        }
         return this.userService.updateUser(user);
     }
 
