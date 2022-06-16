@@ -5,9 +5,11 @@ export default function Post(props) {
 
     return (
         <div className='post'>
-            <p>{props.user}</p>
+            <h4>{props.user}</h4>
             <p>{props.msg}</p>
-            <small>{props.time}</small>
+            <div className="timestamp">
+                <small>{props.time.toLocaleString()}</small>
+            </div>
         </div>
     )
 }

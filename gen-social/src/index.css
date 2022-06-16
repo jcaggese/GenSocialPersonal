@@ -291,10 +291,20 @@ form {
 }
 
 .post{
+  color: black;
   margin-top: 1%;
   margin-right: 2%;
   margin-bottom: 1%;
   padding: 1%;
   display: block;
-  background-color: white;
+  background-color:rgb(46, 139, 192);
+}
+
+small {
+  font-size: .75rem;
+}
+
+.timestamp {
+  display: flex;
+  justify-content: end;
 }
