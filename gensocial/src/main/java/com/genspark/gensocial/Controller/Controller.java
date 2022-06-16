@@ -133,7 +133,7 @@ public class Controller {
     public Post getPost(@PathVariable(value="id") String id){return pServ.getPost(Integer.parseInt(id)); }
 
     @PostMapping("/posts/{userId}")
-    public Post putPost(@PathVariable(value="userId")String username, @RequestBody Post post) {
+    public Post postPost(@PathVariable(value="userId")String username, @RequestBody Post post) {
         return pServ.addPost(username, post); }
 
     @PutMapping("/posts")

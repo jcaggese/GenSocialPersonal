@@ -91,7 +91,7 @@ public class UserServiceImplementation implements UserService {
     }
 
     public User addPost(String username, Post post) {
-        User user = getUserByUsername(username);
+        User user = userRepository.findById(Integer.parseInt(username)).orElseThrow(()->new RuntimeException());
         user.addPost(post);
         userRepository.save(user);
         return user;

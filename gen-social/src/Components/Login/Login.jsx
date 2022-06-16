@@ -40,6 +40,7 @@ const Login = () => {
             hashedPassword = bcrypt.hashSync(password, res.data.salt)
             getFriends();
             localStorage.setItem("loggedEmail", res.data.email)
+            localStorage.setItem("loggedId", res.data.id)
             console.log("res.data.password: " + "$" + res.data.password);
             console.log("password:" + password);
             console.log(hashedPassword);

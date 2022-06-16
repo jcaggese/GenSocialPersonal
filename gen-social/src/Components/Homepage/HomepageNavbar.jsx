@@ -23,7 +23,7 @@ const HomepageNavbar = () => {
 
     const logOut = (e) => {
         console.log(localStorage.getItem("loggedUser"));
-        localStorage.removeItem("loggedUser")
+        localStorage.clear();
         console.log(localStorage.getItem("loggedUser"));
 
     }
