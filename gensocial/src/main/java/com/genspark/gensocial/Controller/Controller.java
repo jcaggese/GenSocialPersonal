@@ -102,20 +102,14 @@ public class Controller {
         }
         // Adding friends
         if(info.substring(2,8).matches("friend")){
-            System.out.println("Friend method accessed");
             String friend = info.substring(11, info.indexOf("\",\"username"));
-            System.out.println(friend);
             // See if the friend we want to add has an account
             try {
                 // Look for friend's account in database
                 User friendUser = userService.getUserByUsername(friend);
-                System.out.println("friendUser = userservice");
                 int friendId = Stream.of(userService.getUserByUsername(friend)).map(User::getId).max(Integer::compare).get();
-                System.out.println("friendId = Stream.of");
                 user = userService.getUserByUsername(usernameSubstring);
-                System.out.println("user = userService");
                 user.setFriend(friendId);
-                System.out.println("user.addFriend");
             }
             catch(UserNotFoundException ex){
                 System.out.println(ex.getMessage());

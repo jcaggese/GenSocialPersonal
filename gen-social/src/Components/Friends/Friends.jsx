@@ -39,6 +39,7 @@ const Friends = () => {
         // If the friendUsername is the same as the user
         if (friendUsername === localStorage.getItem("loggedUser")) {
             console.log("Narcissistic much?");
+            setSuccess(0)
             setError(3)
             return;
         }
@@ -113,6 +114,7 @@ const Friends = () => {
         var areFriends;
         // If the friendUsername is the same as the user
         if (friendUsername === localStorage.getItem("loggedUser")) {
+            setSuccess(0)
             setError(4)
             return;
         }
@@ -315,7 +317,7 @@ const Friends = () => {
             {   /* Shows the manage friends popup*/}
             {!showFriends && isOpen && <FriendPopUp
                 content={<>
-                    <b style={{ color: "white", fontSize: "30px" }}>Add Friend</b>
+                    <b style={{ color: "white", fontSize: "30px" }}>Manage Friends</b>
                     <b>{errorMessage()}</b>
                     <b>{successMessage()}</b>
                     <div style={{ margin: "50px" }}>
