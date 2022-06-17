@@ -41,11 +41,11 @@ const Login = () => {
             getFriends();
             localStorage.setItem("loggedEmail", res.data.email)
             localStorage.setItem("loggedId", res.data.id)
-            console.log("res.data.password: " + "$" + res.data.password);
+            console.log("res.data.password: " + res.data.password);
             console.log("password:" + password);
-            console.log(hashedPassword);
+            console.log("hashedPassword that we typed: " + hashedPassword);
 
-            passwordsMatch = hashedPassword === "$" + res.data.password
+            passwordsMatch = hashedPassword === res.data.password
             // Username and Password is correct
             if (passwordsMatch) {
                 isReal = true;

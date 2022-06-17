@@ -22,7 +22,7 @@ public class PostServiceImplementation implements PostService {
 
     @Override
     public Post getPost(int postId) {
-        return postRepository.findById(postId).orElseThrow(() -> new RuntimeException());
+        return postRepository.findById(postId).orElseThrow(RuntimeException::new);
     }
 
     @Override

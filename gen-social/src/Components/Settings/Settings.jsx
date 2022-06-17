@@ -15,6 +15,10 @@ const Settings = () => {
     const [currentUsername, setCurrentUsername] = useState('');
     // Variables to store the typed password
     const [password, setPassword] = useState('');
+    // Variables to store the new password
+    const [newPassword, setNewPassword] = useState('')
+    // Varialbes to store the confirmed password
+    const [confirmPass, setConfirmPass] = useState('')
     // Variables to store the typed email
     const [email, setEmail] = useState('');
     // Variables to store the current email
@@ -27,11 +31,20 @@ const Settings = () => {
     const [err, setError] = useState(0);
     // Variables for success messages
     const [success, setSuccess] = useState(0);
+    var salt;
+    var updatedPassword;
 
     // Navigation
     const history = useNavigate();
     const togglePopUp = () => {
         setIsOpen(!isOpen);
+    }
+
+    const hashPassword = async () => {
+        const saltRounds = 5;
+        salt = await bcrypt.genSalt(saltRounds);
+        console.log("Salt: " + salt);
+        updatedPassword = await bcrypt.hash(newPassword, salt);
     }
 
     // Function to retrieve the email from the server
@@ -135,7 +148,7 @@ const Settings = () => {
         }
     }
     // Function to handle updating the email
-    const updateEmail = async () => {
+    const updateEmail = () => {
         console.log(currentEmail);
         console.log(newEmail);
         // Stores current username to update email in database
@@ -181,6 +194,82 @@ const Settings = () => {
                     })
             }
         }
+    }
+    // Function to handle updating the password
+    const updatePassword = async () => {
+        setError(0)
+        setSuccess(0)
+        var passwordsMatch;
+        var hashedPassword;
+        await hashPassword()
+        axios.post(`http://localhost:9080/users/`, {
+            username: localStorage.getItem("loggedUser")
+        }).then((res) => {
+            console.log(res.data);
+            console.log("Username: " + res.data.username);
+            console.log("Email: " + res.data.email);
+            console.log("Password: " + res.data.password);
+            console.log("Salt: " + res.data.salt);
+            // Check if current password matches the one on file
+            hashedPassword = bcrypt.hashSync(password, res.data.salt)
+            console.log("password:" + password);
+            console.log("hashedPassword: " + hashedPassword);
+
+            passwordsMatch = hashedPassword === res.data.password
+            // Username and Password is correct
+            if (passwordsMatch) {
+                console.log("Passwords match!");
+                // If the new password is the same as the current password
+                if (password === newPassword) {
+                    console.log("New password cannot match current password");
+                    setError(8)
+                }
+                // If the new password is different from the current password
+                else {
+                    if (newPassword.length < 7 || !(/[A-Z]/g).test(newPassword)) {
+                        console.log("Password must be longer than 7 characters and contain 1 uppercase letter");
+                        setError(9)
+                        return false
+                    }
+                    else {
+                        // If the new password does NOT match the confirm password
+                        if (newPassword !== confirmPass) {
+                            console.log("Confirm password incorrect");
+                            setError(10)
+                        }
+                        // All fields are valid
+                        else {
+                            axios.put(`http://localhost:9080/users`, {
+                                password: updatedPassword,
+                                username: localStorage.getItem("loggedUser"),
+                                "salt": salt
+                            })
+                                .then(res => {
+                                    console.log(res);
+                                    setError(0)
+                                    setSuccess(3)
+                                }).catch(err => {
+                                    console.log(err);
+                                })
+                        }
+                    }
+                }
+            }
+            // Password is incorrect
+            else {
+                setError(7)
+                console.log("Passwords don't match");
+            }
+        }).catch(err => {
+            // Username is incorrect
+            if (err.response === 404) {
+                setError(4);
+                console.log("User not found")
+            }
+            else {
+                console.log(err);
+            }
+        });
     }
     // Function to delete the account
     const deleteAccount = (usernameToDelete, deletePassword) => {
@@ -269,6 +358,14 @@ const Settings = () => {
     const handlePassword = (e) => {
         setPassword(e.target.value);
     }
+    // Function to handle new password
+    const handleNewPassword = (e) => {
+        setNewPassword(e.target.value)
+    }
+    // Function to handle confirm password
+    const handleConfirmPass = (e) => {
+        setConfirmPass(e.target.value)
+    }
     // Switch the browser to the login page
     const goToHome = async () => {
         await deleteAccount();
@@ -313,6 +410,30 @@ const Settings = () => {
                 <small style={{ display: err ? '' : 'none', color: "black" }}>Honestly, I don't even know what happened. Try again</small>
             );
         }
+        // If the user failed to type in the correct current password
+        if (err === 7) {
+            return (
+                <small style={{ display: err ? '' : 'none', color: "black" }}>Current password does not match the one on file</small>
+            );
+        }
+        // If the user failed to type a unique new password
+        if (err === 8) {
+            return (
+                <small style={{ display: err ? '' : 'none', color: "black" }}>New password matches current password</small>
+            );
+        }
+        // If the new password is not > 7 characters OR does not contain 1 uppercase letter
+        if (err === 9) {
+            return (
+                <small style={{ display: err ? '' : 'none', color: "black" }}>New password must be longer than 7 characters AND contain at least 1 uppercase character</small>
+            );
+        }
+        // If confirm password does not match new password
+        if (err === 10) {
+            return (
+                <small style={{ display: err ? '' : 'none', color: "black" }}>Confirm password does not match new password</small>
+            );
+        }
     }
     // Function to display success messages
     const successMessage = () => {
@@ -326,6 +447,12 @@ const Settings = () => {
         if (success === 2) {
             return (
                 <h1>Email successfully updated!</h1>
+            )
+        }
+        // Password successfully updated
+        if (success === 3) {
+            return (
+                <h1>Password successfully updated!</h1>
             )
         }
     }
@@ -352,7 +479,7 @@ const Settings = () => {
                                     <button id="change-username" style={{ marginTop: "10px", backgroundColor: "black" }} onClick={handleDecision} className='btn btn-primary'>Change Username</button>
                                 </div>
                                 <div>
-                                    <button id="change-password" style={{ marginTop: "10px", backgroundColor: "black" }} onClick={handleDecision} className='btn btn-primary'>Change Password "NOT DONE"</button>
+                                    <button id="change-password" style={{ marginTop: "10px", backgroundColor: "black" }} onClick={handleDecision} className='btn btn-primary'>Change Password</button>
                                 </div>
                                 <div>
                                     <button id="change-email" style={{ marginTop: "10px", backgroundColor: "black" }} onClick={handleDecision} className='btn btn-primary'>Change Email</button>
@@ -452,22 +579,23 @@ const Settings = () => {
                                 <div id="changeUsernameDiv">
                                     <div>
                                         <label htmlFor='currentPassword' className='form-label' style={{ fontSize: "26px" }}>Current Password:</label>
-                                        <input style={{ marginLeft: "10px", width: "265px" }} type="password" className='change-password-input' placeholder='Please type current password here'></input>
+                                        <input onChange={handlePassword} style={{ marginLeft: "10px", width: "265px" }} type="password" className='change-password-input' placeholder='Please type current password here'></input>
                                     </div>
                                     <div>
                                         <label htmlFor='newPassword' className='form-label' style={{ fontSize: "26px" }}>New Password:</label>
-                                        <input style={{ marginLeft: "10px", width: "265px" }} type="password" className='change-password-input' placeholder='Please type desired password here'></input>
+                                        <input onChange={handleNewPassword} style={{ marginLeft: "10px", width: "265px" }} type="password" className='change-password-input' placeholder='Please type desired password here'></input>
                                     </div>
                                     <div>
                                         <label htmlFor='confirmPassword' className='form-label' style={{ fontSize: "26px" }}>Confirm Password:</label>
-                                        <input style={{ marginLeft: "10px", width: "265px" }} type="password" className='confirm-password-input' placeholder='Please type desired password here'></input>
+                                        <input onChange={handleConfirmPass} style={{ marginLeft: "10px", width: "265px" }} type="password" className='confirm-password-input' placeholder='Please type desired password here'></input>
                                     </div>
                                 </div>
                                 <small> {errorMessage()}</small>
                                 <small> {successMessage()}</small>
                                 <div className='change-username-div'>
+                                  
                                     <div>
-                                        <button type="submit" style={{ backgroundColor: "red" }} className='btn btn-primary mb-1'>Submit</button>
+                                        <button type="submit" style={{ backgroundColor: "red" }} className='btn btn-primary mb-1' onClick={updatePassword}>Submit</button>
                                     </div>
                                     <button id="show-main" style={{ marginTop: "10px", backgroundColor: "black" }} onClick={handleDecision} className='btn btn-primary'>Show Main Settings</button>
                                 </div>

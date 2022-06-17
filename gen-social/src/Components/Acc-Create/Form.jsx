@@ -46,9 +46,10 @@ export default function Form() {
 
     const hashPassword = async () => {
         const saltRounds = 5;
-        salt = await bcrypt.genSaltSync(saltRounds);
+        salt = await bcrypt.genSalt(saltRounds);
         console.log("Salt: " + salt);
-        pass = await bcrypt.hashSync(password, salt);
+        pass = await bcrypt.hash(password, salt);
+        console.log(pass);
     }
 
     // Handling submission

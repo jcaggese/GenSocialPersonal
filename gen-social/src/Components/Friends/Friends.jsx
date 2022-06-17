@@ -75,11 +75,13 @@ const Friends = () => {
                         })
                     }
                 }).then(f => {
+                    // If the users are already friends
                     if (areFriends) {
                         console.log("Already friends");
                         setSuccess(0)
                         setError(2)
                     }
+                    // If the users are not friends
                     else {
                         axios.put("http://localhost:9080/users", {
                             friend: friendUsername,

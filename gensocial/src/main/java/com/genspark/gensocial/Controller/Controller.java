@@ -7,6 +7,8 @@ import com.genspark.gensocial.Entities.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -77,8 +79,9 @@ public class Controller {
         System.out.println(info);
         user.setUsername(info.substring(13, info.indexOf("\",\"email")));
         user.setEmail(info.substring(info.indexOf("\",\"email\":\"") + 11 , info.indexOf("\",\"pass")));
-        user.setPassword(info.substring(info.indexOf("\",\"pass\":\"") + 11, info.indexOf("\",\"salt")));
+        user.setPassword(info.substring(info.indexOf("\",\"pass\":\"") + 10, info.indexOf("\",\"salt")));
         user.setSalt(info.substring(info.indexOf("salt") + 7, info.indexOf("\"}")));
+        System.out.println(user.getPassword());
         this.userService.addUser(user);
     }
 
@@ -93,7 +96,7 @@ public class Controller {
             user = userService.getUserByUsername(usernameSubstring);
             user.setEmail(info.substring(10, info.indexOf("\",\"")));
         }
-        // Updating the password
+        // Updating the username
         if (info.substring(2, 10).matches("username")) {
             String newUsernameSubstring = info.substring(info.indexOf("update") + 9, info.indexOf("\"}"));
             String userSubstring = info.substring(info.indexOf("e\":\"") + 4, info.indexOf("\",\""));
@@ -115,6 +118,24 @@ public class Controller {
                 System.out.println(ex.getMessage());
             }
         }
+
+        // Updating the password
+        if(info.substring(2,10).matches("password")){
+            usernameSubstring = info.substring(info.indexOf("username") + 11, info.indexOf("\",\"salt"));
+            System.out.println("usernamesubstring in update password: " + usernameSubstring);
+            String password = info.substring(13, info.indexOf("\",\"username"));
+            System.out.println(password);
+            String salt = info.substring(info.indexOf("salt") + 7, info.indexOf("\"}"));
+            System.out.println(salt);
+            user = userService.getUserByUsername(usernameSubstring);
+            System.out.println("Previous password: " + user.getPassword());
+            user.setPassword(password);
+            System.out.println("New Password: " + user.getPassword());
+            System.out.println("Previous Salt: " + user.getSalt());
+            user.setSalt(salt);
+            System.out.println("New Salt: " + user.getSalt());
+        }
+
         return this.userService.updateUser(user);
     }
 
@@ -125,6 +146,9 @@ public class Controller {
         return this.userService.deleteUserByUsername(user);
     }
 
+
+
+
     //Post API
     @GetMapping("/posts")
     public List<Post> getPosts(){return pServ.getPosts(); }
@@ -133,12 +157,21 @@ public class Controller {
     public Post getPost(@PathVariable(value="id") String id){return pServ.getPost(Integer.parseInt(id)); }
 
     @PostMapping("/posts/{userId}")
-    public Post postPost(@PathVariable(value="userId")String username, @RequestBody Post post) {
+    public Post addPost(@PathVariable(value="userId")String username, @RequestBody Post post) {
         return pServ.addPost(username, post); }
 
     @PutMapping("/posts")
-    public Post putPost(@RequestBody Post post) {
-        return pServ.updatePost(post); }
+    public Post updatePostText(@RequestBody String info) {
+        System.out.println(info);
+        LocalDateTime time = LocalDateTime.now();
+
+        String text = info.substring(info.indexOf(":\"") + 2, info.indexOf("\",\""));
+        String postId = info.substring(info.indexOf("Id") + 4, info.indexOf("}"));
+        Post temp = pServ.getPost(Integer.parseInt(postId));
+        temp.setText(text);
+        temp.setTime(time);
+        return pServ.updatePost(temp);
+    }
 
     @DeleteMapping("/posts/{id}")
     public String deletePost(@PathVariable(value="id")String id) {return pServ.deletePost(Integer.parseInt(id)); }

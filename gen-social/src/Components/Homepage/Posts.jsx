@@ -1,10 +1,12 @@
-import React from "react"
+import { React, useState, useEffect } from "react"
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Post from './Post'
 import axios from "axios";
 
+
 export default function Posts() {
-    const [postEls, setPostEls] = React.useState([])
+
+    const [postEls, setPostEls] = useState([])
 
     function handlePost() {
         try {
@@ -13,6 +15,9 @@ export default function Posts() {
             }).then((response) => {
                 if (response.status === 200) {
                     console.log("Posted!")
+                }
+                else{
+                    console.log("found error");
                 }
                 createPosts()
             })
@@ -30,21 +35,24 @@ export default function Posts() {
                 console.log(toShow)
                 const friends = localStorage.getItem("friends")
                 console.log(friends)
+                console.log(response.data);
                 if (friends !== null)
                     toShow += friends.split(",")
                 console.log(toShow.includes("Strawberry"))
                 let el = []
                 for (let i = 0, j = 0; i < response.data.length; i++) {
                     if (toShow.includes(response.data[i].user.username))
-                        el[j++] = <Post key={response.data[i].postId} user={response.data[i].user.username} msg={response.data[i].text} 
+                        el[j++] = <Post key={response.data[i].postId} selectedPostId={response.data[i].postId} user={response.data[i].user.username} msg={response.data[i].text} 
                                     time={new Date(response.data[i].time)} />
                 }
-                setPostEls(el.reverse())
+                setPostEls(el)
             }
         })
     }
 
-    React.useEffect(() => {
+    
+
+    useEffect(() => {
         createPosts();
     }, []);
 
@@ -62,3 +70,4 @@ export default function Posts() {
         </div>
     )
 }
+
