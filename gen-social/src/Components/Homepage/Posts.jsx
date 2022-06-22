@@ -45,7 +45,7 @@ export default function Posts() {
                         el[j++] = <Post key={response.data[i].postId} selectedPostId={response.data[i].postId} user={response.data[i].user.username} msg={response.data[i].text} 
                                     time={new Date(response.data[i].time)} />
                 }
-                setPostEls(el)
+                setPostEls(el.reverse())
             }
         })
     }

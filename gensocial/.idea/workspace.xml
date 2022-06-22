@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbafe708-dc8b-4fe1-9cfb-0da6dbdebdf8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../gen-social/src/Components/Friends/Friends.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/src/Components/Friends/Friends.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gen-social/src/Components/Settings/Settings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../gen-social/src/Components/Settings/Settings.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/PostServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genspark/gensocial/Services/PostServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
